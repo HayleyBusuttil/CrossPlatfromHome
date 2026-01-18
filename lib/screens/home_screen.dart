@@ -38,14 +38,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   double get balance => incomeTotal - expenseTotal;
 
-  void _openAddScreen() {
-    Navigator.push(
+  void _openAddScreen() async {
+    final result = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (ctx) => const AddTransactionScreen(),
       ),
     );
+
+    if (result == null) return;
+
+    setState(() {
+      _txs.insert(0, result);
+    });
   }
+
 
   @override
   Widget build(BuildContext context) {
