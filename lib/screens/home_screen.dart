@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../model/transaction.dart';
 import '../widgets/transaction_list.dart';
 import 'add_transaction.dart';
+import 'package:hive/hive.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,22 +13,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<WalletTransaction> _txs = [
-    WalletTransaction(
-      title: "Grocery shopping",
-      amount: 45.50,
-      date: DateTime.now(),
-      type: TxType.expense,
-      category: "Food",
-    ),
-    WalletTransaction(
-      title: "December Salary",
-      amount: 2500.00,
-      date: DateTime.now(),
-      type: TxType.income,
-      category: "Salary",
-    ),
-  ];
+  // Hive box for transactions 
+  late Box<WalletTransaction> _txBox;
+  List<WalletTransaction> _txs = [];
+
 
   double get incomeTotal => _txs
       .where((t) => t.type == TxType.income)
@@ -41,16 +31,24 @@ class _HomeScreenState extends State<HomeScreen> {
   void _openAddScreen() async {
     final result = await Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (ctx) => const AddTransactionScreen(),
-      ),
+      MaterialPageRoute(builder: (ctx) => const AddTransactionScreen()),
     );
 
     if (result == null) return;
 
+    await _txBox.add(result); //ensure it’s written to disk
+
     setState(() {
-      _txs.insert(0, result);
+      _txs = _txBox.values.toList().reversed.toList(); // reload from Hive
     });
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    _txBox = Hive.box<WalletTransaction>('transactions');
+    _txs = _txBox.values.toList().reversed.toList();
   }
 
 

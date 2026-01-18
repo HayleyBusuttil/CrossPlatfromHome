@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import 'model/transaction.dart';
 import 'screens/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(TxTypeAdapter());
+  Hive.registerAdapter(WalletTransactionAdapter());
+
+  await Hive.openBox<WalletTransaction>('transactions');
+
   runApp(const WiseWalletApp());
 }
 
@@ -10,10 +22,9 @@ class WiseWalletApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Wise Wallet',
-      home: const HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }
