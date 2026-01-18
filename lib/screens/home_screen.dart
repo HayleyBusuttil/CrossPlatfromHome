@@ -13,18 +13,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<WalletTransaction> _txs = [
     WalletTransaction(
-      title: "Food",
+      title: "Grocery shopping",
       amount: 45.50,
       date: DateTime.now(),
       type: TxType.expense,
-      category: "Grocery Shopping",
+      category: "Food",
     ),
     WalletTransaction(
-      title: "Salary",
+      title: "December Salary",
       amount: 2500.00,
       date: DateTime.now(),
       type: TxType.income,
-      category: "December Salary",
+      category: "Salary",
     ),
   ];
 

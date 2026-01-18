@@ -15,6 +15,13 @@ class TransactionItem extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: ListTile(
+        leading: CircleAvatar(
+          backgroundColor: const Color.fromARGB(29, 0, 0, 0),
+          child: Icon(
+            _categoryIcon(tx.category),
+            color: isIncome ? Colors.green : Colors.red,
+          ),
+        ),
         title: Text(tx.title, style: const TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(tx.category),
         trailing: Text(
@@ -24,4 +31,25 @@ class TransactionItem extends StatelessWidget {
       ),
     );
   }
+
+// Helper to get category icon to show in transaction item
+  IconData _categoryIcon(String category) {
+  switch (category) {
+    case "Food":
+      return Icons.fastfood;
+    case "Transport":
+      return Icons.directions_bus;
+    case "Entertainment":
+      return Icons.movie;
+    case "Bills":
+      return Icons.receipt_long;
+    case "Salary":
+      return Icons.account_balance_wallet;
+    case "Freelance":
+      return Icons.work;
+    default:
+      return Icons.category;
+  }
+}
+
 }
