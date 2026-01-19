@@ -24,3 +24,8 @@ Hive was initialised in main.dart, and the home screen was updated to load trans
 
 During testing on Chrome, saved data was not visable after restarting the app due to the browser assigning a different localhost port on each run. 
 This issue was resolved by running the application with a fixed web port using "flutter run -d chrome --web-port 5000", this ensured consistent browser storage access between runs.
+
+# Device-Specific Feature (camera)
+R&U3 – Device-Specific Feature
+
+The device camera was integrated using the image_picker package to allow users to capture receipt images when adding a transaction. The captured image is returned to the application and stored as part of the transaction data.

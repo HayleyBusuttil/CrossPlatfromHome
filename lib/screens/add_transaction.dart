@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/transaction.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 class AddTransactionScreen extends StatefulWidget {
   const AddTransactionScreen({super.key});
@@ -11,7 +13,7 @@ class AddTransactionScreen extends StatefulWidget {
 class _AddTransactionScreenState extends State<AddTransactionScreen> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-
+  File? _receiptImage;
   TxType _type = TxType.expense;
   String _category = "Food";
 
@@ -43,13 +45,25 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
       date: DateTime.now(),
       type: _type,
       category: _category,
+      receiptPath: _receiptImage?.path
     );
 
     Navigator.pop(context, tx);
   }
 
+  Future<void> _pickReceiptFromCamera() async {
+    final picked = await ImagePicker().pickImage(source: ImageSource.camera);
+
+    if (picked == null) return;
+
+    setState(() {
+      _receiptImage = File(picked.path);
+    });
+  }
+
+
   @override
-Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
   final categories =
       _type == TxType.expense ? _expenseCategories : _incomeCategories;
 
@@ -186,7 +200,7 @@ Widget build(BuildContext context) {
 
           // Receipt Button
           OutlinedButton(
-            onPressed: () {},
+            onPressed: _pickReceiptFromCamera,
             style: OutlinedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
               shape: RoundedRectangleBorder(
@@ -195,6 +209,20 @@ Widget build(BuildContext context) {
             ),
             child: const Text("Add Receipt Image"),
           ),
+
+          //image preview
+          if (_receiptImage != null) ...[
+            const SizedBox(height: 12),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.file(
+                _receiptImage!,
+                height: 100,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ],
 
           const SizedBox(height: 24),
 

@@ -18,6 +18,7 @@ class WalletTransaction {
     required this.date,
     required this.type,
     required this.category,
+    this.receiptPath,
   });
 
   @HiveField(0)
@@ -34,4 +35,7 @@ class WalletTransaction {
 
   @HiveField(4)
   final String category;
+
+  @HiveField(5)
+  final String? receiptPath;
 }
