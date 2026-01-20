@@ -34,3 +34,9 @@ The device camera was integrated using the image_picker package to allow users t
 A&A4 – Notifications / Background Services 
 
 Local notifications were implemented using the flutter_local_notifications package. The app triggers a high-priority notification when the user logs an expense above a defined threshold (€50), providing immediate feedback and encouraging better spending awareness.
+
+# Firebase Analytics
+R&U6 – Analytics & Monitoring 
+
+Firebase Analytics was integrated using the FlutterFire CLI. The firebase_core and firebase_analytics packages were installed, Firebase was initialised in main.dart, and custom events were logged for key user actions such as opening the add transaction screen and adding a transaction. 
+Firebase Analytics events can take time to appear in the Events dashboard. The integration was committed after confirming successful setup to avoid delaying progress on my work.

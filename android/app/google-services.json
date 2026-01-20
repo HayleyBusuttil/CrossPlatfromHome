@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "139804228419",
+    "project_id": "wisewallet-6010b",
+    "storage_bucket": "wisewallet-6010b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139804228419:android:f3d8ec6e13e906d85f4df6",
+        "android_client_info": {
+          "package_name": "com.example.wise_wallett"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNg7OSkAdGJzlcyWa7VSet2P6Row1wmwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

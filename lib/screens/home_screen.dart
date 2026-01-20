@@ -5,6 +5,7 @@ import 'add_transaction.dart';
 import 'package:hive/hive.dart';
 
 import '../services/notifications.dart';
+import '../services/analytics.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -31,12 +32,20 @@ class _HomeScreenState extends State<HomeScreen> {
   double get balance => incomeTotal - expenseTotal;
 
   void _openAddScreen() async {
+    await Analytics.instance.logOpenAddScreen();
+
     final result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (ctx) => const AddTransactionScreen()),
     );
 
     if (result == null) return;
+
+    await Analytics.instance.logAddTransaction(
+      type: result.type == TxType.expense ? "expense" : "income",
+      category: result.category,
+      amount: result.amount,
+    );
 
     if (result.type == TxType.expense && result.amount >= 50) {
       await Notifications.instance.showHighExpense(result.amount);
