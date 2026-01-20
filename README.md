@@ -40,3 +40,13 @@ R&U6 – Analytics & Monitoring
 
 Firebase Analytics was integrated using the FlutterFire CLI. The firebase_core and firebase_analytics packages were installed, Firebase was initialised in main.dart, and custom events were logged for key user actions such as opening the add transaction screen and adding a transaction. 
 Firebase Analytics events can take time to appear in the Events dashboard. The integration was committed after confirming successful setup to avoid delaying progress on my work.
+
+# Performance Analysis
+E&C3 – Performance Analysis & Optimisation
+
+Flutter DevTools was used to analyse the app’s performance during normal interaction. Some minor frame drops were detected when loading and rendering the transaction list, which is likely caused by rebuilding multiple widgets at once. 
+
+# Accessibility Evaluarion 
+R&U1 – Accessibility Evaluation 
+
+Flutter’s built-in accessibility checker was used through Flutter DevTools to review the app’s user interface. By selecting and tapping on interactive elements such as buttons and transaction items, accessibility information and widget structure were displayed.
