@@ -29,3 +29,8 @@ This issue was resolved by running the application with a fixed web port using "
 R&U3 – Device-Specific Feature
 
 The device camera was integrated using the image_picker package to allow users to capture receipt images when adding a transaction. The captured image is returned to the application and stored as part of the transaction data.
+
+# Local Notifications
+A&A4 – Notifications / Background Services 
+
+Local notifications were implemented using the flutter_local_notifications package. The app triggers a high-priority notification when the user logs an expense above a defined threshold (€50), providing immediate feedback and encouraging better spending awareness.

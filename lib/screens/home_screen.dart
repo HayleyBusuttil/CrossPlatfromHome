@@ -4,6 +4,8 @@ import '../widgets/transaction_list.dart';
 import 'add_transaction.dart';
 import 'package:hive/hive.dart';
 
+import '../services/notifications.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,11 +38,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (result == null) return;
 
-    await _txBox.add(result); //ensure it’s written to disk
+    if (result.type == TxType.expense && result.amount >= 50) {
+      await Notifications.instance.showHighExpense(result.amount);
+    }
 
+    await _txBox.add(result);
     setState(() {
-      _txs = _txBox.values.toList().reversed.toList(); // reload from Hive
+      _txs = _txBox.values.toList().reversed.toList();
     });
+
   }
 
 

@@ -4,6 +4,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'model/transaction.dart';
 import 'screens/home_screen.dart';
 
+import 'services/notifications.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -13,6 +15,8 @@ void main() async {
   Hive.registerAdapter(WalletTransactionAdapter());
 
   await Hive.openBox<WalletTransaction>('transactions');
+
+  await Notifications.instance.init();
 
   runApp(const WiseWalletApp());
 }
