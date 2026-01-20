@@ -50,3 +50,8 @@ Flutter DevTools was used to analyse the app’s performance during normal inter
 R&U1 – Accessibility Evaluation 
 
 Flutter’s built-in accessibility checker was used through Flutter DevTools to review the app’s user interface. By selecting and tapping on interactive elements such as buttons and transaction items, accessibility information and widget structure were displayed.
+
+# CI/CD Pipelines
+A&A5 – CI/CD Pipeline
+
+A GitHub Actions workflow was added to the project by creating a file at .github/workflows/flutter_ci.yml. This file defines an automated process that runs whenever changes are pushed to the repository or a pull request is created. The workflow installs Flutter, fetches project dependencies, runs static analysis, and executes tests to ensure the application remains stable after updates
